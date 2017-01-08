@@ -1,3 +1,9 @@
+body {
+    background-color: powderblue;
+}
+h1 {
+    color: blue;
+}
 p {
-font-family: "San Francisco", Helvetica, Arial;
+    color: red;
 }
