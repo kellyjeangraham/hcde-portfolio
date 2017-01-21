@@ -7,7 +7,7 @@ function setup() {
 }
 
 function draw() {
-  background(205);
+  background(220);
   translate(mouseX, mouseY);
   
   //Neck 
