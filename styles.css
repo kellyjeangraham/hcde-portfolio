@@ -1,5 +1,6 @@
 body {
 font-family: "San Francisco", Helvetica, Arial;
 text-align: center;
-margin-top: 400px;
+margin: 200px, 400px, 100px;
+list-style-type: none;
 }
