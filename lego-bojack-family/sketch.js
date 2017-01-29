@@ -3,11 +3,10 @@
 // "Lego family" animation of Bojack Horseman main characters
 
 // VARIABLES
+var speed = 4; // variable to adjust speed of character movement
 
-var speed = 1; // variable to adjust speed of character movement
-
-var bojX = 10; // set X position variable to move Bojack around
-var bojY = 10; // set Y position variable to move Bojack around
+var bojX = 10; // set X position variable to start Bojack
+var bojY = 10; // set Y position variable to start Bojack
 var bojEndX = 300; // end position for bojack
 var bojEndY = 200; // end y-position for bojack
 
@@ -16,8 +15,8 @@ var toddY = 430; // set Y position variable to use in Todd movement
 var toddEndX = 420; //end x-pos for todd
 var toddEndY = 220; //end y-pos for todd
 
-var pcX = 1090; // set variable to move Princess Carolyn around
-var pcY = 40; // set variable to move PC around height-wise
+var pcX = 1090; // set variable for PC's start x-location
+var pcY = 40; // set variable for PC's start y-location 
 var pcEndX = 540; // end x-pos for Princess Carolyn
 var pcEndY = 250; // end y-pos for Princess Carolyn
 
@@ -31,43 +30,40 @@ var dianeY = 460; // y-position variable to move Diane
 var dianeEndX = 780; // ending position for Diane
 var dianeEndY = 250; // ending y-position for Diane
 
-// end at 780, 250;
-
 function setup() {
-  createCanvas(1200, 800);
-  noStroke();
+  createCanvas(1200, 800); // build the canvas size
+  noStroke(); // remove outlines from objects
 }
 
 function draw() {
-  background(255, 245, 255);
-  bojack();
-  todd();
-  princessCarolyn();
-  diane();
-  mrPeanutButter();
+  background(255, 245, 245); // redraw light pink background every draw loop
+
+  bojack(); // call bojack function to place on canvas
+  todd(); // call todd function to place on canvas
+  princessCarolyn(); // call princess carolyn function to place on canvas
+  diane(); // call diane function to place on canvas
+  mrPeanutButter(); // call mr. peanutbutter function to place on canvas
   
-  bojX = min(bojX + speed, bojEndX);
-  bojY = min(bojY + speed, bojEndY);
+  bojX = min(bojX + speed, bojEndX); // min function moves bojack by adding speed value until reaching bojEndX value
+  bojY = min(bojY + speed, bojEndY); // min function to move bojack vertically until he reaches bojEndY value
   
-  toddX = min(toddX + speed, toddEndX);
-  toddY = max(toddY - speed, toddEndY);
+  toddX = min(toddX + speed, toddEndX); // min to move Todd towards the center
+  toddY = max(toddY - speed, toddEndY); // Todd's start is higher than his finish, so we use max and minus speed to reverse it
   
-  pcX = max(pcX - speed, pcEndX);
-  pcY = min(pcY + speed, pcEndY);
+  pcX = max(pcX - speed, pcEndX); // PC starts further over so we use max and -speed
+  pcY = min(pcY + speed, pcEndY); // moves PC downward until pcEndY
   
-  pbX = max(pbX - speed, pbEndX);
-  pbY = max(pbY - speed, pbEndY);
+  pbX = max(pbX - speed, pbEndX); // Move Mr. PB left
+  pbY = max(pbY - speed, pbEndY); // Moves Mr. PB upward using max
   
-  dianeX = max(dianeX - speed, dianeEndX);
-  dianeY = max(dianeY - speed, dianeEndY);
-  
-  
-  
+  dianeX = max(dianeX - speed, dianeEndX); // Move Diane left horizontally
+  dianeY = max(dianeY - speed, dianeEndY); // Move Diane upward
 }
 
 // CHARACTERS
 
-function bojack() {
+//Bojack function draws rectangles of Bojack's body and clothes
+function bojack() { 
   var bojW = 100; // define Bojack's body width to easily tweak it
   var bojH = 380; // define variable to change Bojack height
   
@@ -88,6 +84,7 @@ function bojack() {
   rect(bojX, bojY + 250, bojW, bojH - 250); // draw Bojack's pants rectangle
 }
 
+// Todd function draws rectangles for Todd's body and clothes with variables for height and width
 function todd() {
   var toddW = 100; // set variable to adjust Todd's width
   var toddH = 360; // set variable to adjust Todd's height
@@ -105,6 +102,7 @@ function todd() {
   rect(toddX, toddY + 240, toddW, toddH - 240); // draw rectangle for Todd's jeans
 }
 
+// Princess Carolyn function draws rectangles for her body and clothes, and triangles for ears
 function princessCarolyn() {
   var pcW = 100; // set width of PC to adjust easily
   var pcH = 330; // set height of PC, she's shorter than most of the others
@@ -122,9 +120,10 @@ function princessCarolyn() {
   rect(pcX + 70, pcY + 90, pcW - 70, pcH - 240); // draw right side of PC's cardigan
 }
 
+// Mr. Peanut Butter function draws rectangles for Mr. PB shape
 function mrPeanutButter() {
-  var pbW = 100; // set Mr. PB's width
-  var pbH = 360; // set Mr. PB's height, he's not quite as tall as Bojack
+   var pbW = 100; // set Mr. PB's width
+   var pbH = 360; // set Mr. PB's height, he's not quite as tall as Bojack
   
   fill(252, 202, 0); // set yellow color for Mr. PB's body
   rect(pbX, pbY, pbW, pbH); //draw Mr. PB's body
@@ -139,6 +138,7 @@ function mrPeanutButter() {
   rect(pbX, pbY + 240, pbW, pbH - 240); // draw PB's track pants
 }
 
+// Diane function draws series of rectangles for Diane shape
 function diane() {
   var dianeW = 100; // Diane's width variable (ended up keeping them all the same for consistency's sake)
   var dianeH = 330; // Diane's height variable (same as PC)
