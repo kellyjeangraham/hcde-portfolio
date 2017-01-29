@@ -4,3 +4,11 @@ text-align: center;
 margin: 200px, 400px, 100px;
 list-style-type: none;
 }
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  list-style-type: none;
+}
