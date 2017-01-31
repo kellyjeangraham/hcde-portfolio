@@ -1,6 +1,6 @@
-// Kelly Graham
-// Last edit: 1/28/17
-// "Lego family" animation of Bojack Horseman main characters
+// Created by: Kelly Graham
+// Last edited 1/28/17
+// Bojack Horseman characters that start at corners and meet in the middle
 
 // VARIABLES
 var speed = 4; // variable to adjust speed of character movement
@@ -70,7 +70,7 @@ function bojack() {
   fill(190, 88, 26); // main color for Bojack's body
   rect(bojX, bojY, bojW, bojH); // draw rectangle for Bojack's entire body
   
-  fill(255); // white fill color for Bojack's blze
+  fill(255); // white fill color for Bojack's blaze
   rect(bojX + 42, bojY + 30, 15, 70); // draw rectangle for Bojack's white blaze
   
   fill(116); // fill color for grey jacket
