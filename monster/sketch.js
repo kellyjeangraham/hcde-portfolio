@@ -2,7 +2,8 @@
 // Last edited 1/31/17
 // A monster drawing that either follows the mouse with its eyes or jumps up and down based on mouse click
 
-var page = 0;
+var page = 0; // variable to flip between jumping and looking
+var eyeDirection = 0;
 
 var w = 240; // variable for body width
 
@@ -17,7 +18,11 @@ function draw() {
   monster(600, 250);
   
   if (page == 0) {
-    // add code here as you complete step 4
+    if(mouseX < width/2 - 50) {
+      eyeDirection = eyeDirection - 0.5;
+    } else if (mouseX > width/2 + 50) {
+      eyeDirection = max(eyeDirection + 0.5);
+    }
   } else {
     // add code here as you complete step 5
   }
@@ -72,7 +77,12 @@ function eyes(x, y) { //eyes go here to be called into monster
   ellipse(x + 50, y, 60, 60); // right eye
   
   fill(80, 0, 80); // dark purple for pupils
-  ellipse(x - 50, y, 30, 30); // left pupil
-  ellipse(x + 50, y, 30, 30); // right pupil
+  ellipse(x - 50 + eyeDirection, y, 30, 30); // left pupil
+  ellipse(x + 50 + eyeDirection, y, 30, 30); // right pupil
 }
 
+function mousePressed() {
+  page = 1 - page;
+  fill(0);
+  ellipse(mouseX, mouseY, 20, 20);
+}
