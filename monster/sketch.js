@@ -1,11 +1,12 @@
 // Created by Kelly Graham
-// Last edited 1/31/17
-// A monster drawing that either follows the mouse with its eyes or jumps up and down based on mouse click
+// Last edited 2/03/17
+// A monster drawing that either follows the mouse with its eyes or jumps up and down based on mouse click on a button. 
 
 var page = 0; // variable to flip between jumping and looking
-var eyeDirection = 0;
-
+var eyeDirection = 0; // variable to change direction of eyes to look left or right based on mouse position
 var w = 240; // variable for body width
+var jumpValue = 0; // value added to the y-position of monster to make it jump
+var jumpDir = 5; // value to switch direction and speed
 
 function setup() {
   createCanvas(1200, 760); // draw the working canvas
@@ -15,26 +16,35 @@ function setup() {
 
 function draw() {
   background(245, 230, 245); // light pink background in draw to keep it refreshing
-  monster(600, 250);
+  monster(600, 250 + jumpValue); // draws monster at x and y coordinates, y-coord modified by jumping variable
   
-  if (page == 0) {
-    if(mouseX < width/2 - 50) {
-      eyeDirection = eyeDirection - 0.5;
-    } else if (mouseX > width/2 + 50) {
-      eyeDirection = max(eyeDirection + 0.5);
+  fill(80, 0, 80); // fill for switch button
+  rect(200, 100, 200, 60); // draws switch button in top left
+
+  if (page == 0) { // switches to eye movement state
+    jumpValue = 0; // resets monster to middle of screen
+    if(mouseX < width/2 - 50 && -15 <= eyeDirection) { // if the mouse is left of the monster's eyes and eyeDir hasn't put the pupil outside the eye, run this block
+      eyeDirection = eyeDirection - 0.5; // increments eyeDirection negatively to move eyes left
+    } else if (mouseX > width/2 + 50 && 15 >= eyeDirection) { // otherwise if the mouse is to the right of the eyes and not outside the right eyeball 
+      eyeDirection = eyeDirection + 0.5; // increments eyeDirection positively to move eyes right
     }
-  } else {
-    // add code here as you complete step 5
+  } 
+  else { // switches to state for jumping
+    eyeDirection = 0; // resets eyes to center
+    jumpValue = jumpValue + jumpDir; // jumpValue moves the initial drawing of the monster based on the direction
+    if (jumpValue > 150 || jumpValue < -120) { // checks if monster has moved to bottom or top of screen
+      jumpDir = jumpDir * -1; // if monster is at top or bottom, reverse direction
+    }
   }
 }
 
-function monster(x, y) { // don't forget to include some parameters, this is the larger monster function that will call smaller body part functions
-  legs(x, y);
+// this draws the overall monster, with each component located relative to its overarching x/y
+function monster(x, y) { 
+  legs(x, y + 20 - (0.2 * jumpValue));
   body(x, y);
   eyes(x, y);
-  
 }
-
+// draws the monster legs, socks, and shoes
 function legs(x, y) { // this draws the legs and feet of the monster
   fill(80, 0, 80); // dark purple for legs
   rect(x - 50, y + 220, w / 12, w); // left leg
@@ -57,7 +67,8 @@ function legs(x, y) { // this draws the legs and feet of the monster
   rect(x + 50, y + 337, w / 12, 8); // right shoe tongue
 }
 
-function body(x, y) { // this draws the major shapes of the monster body
+// this draws the major shapes of the monster body
+function body(x, y) { 
   fill(205, 215, 255); // lavender ghost fill
   ellipse(x, y, w, w); // draw head top curve
   rect(x, y + 120, w, w); // draw body fill going down from curve
@@ -68,10 +79,17 @@ function body(x, y) { // this draws the major shapes of the monster body
   triangle(x + 90, y + 240, x + 120, y + 240, x + 120, y + 280); // draw ridged bottom of body (right)
   
   fill (80, 0, 80); 
-  ellipse(x, y + 60, 20, 20); // draw mouth circle
+  if (page == 0) { // check to see if in eye-movement mode
+    ellipse(x, y + 60, 20 + abs(eyeDirection), 20); // draw mouth circle that widens when eyes are farther to left or right using absolute value
+  } else if (page != 0 && jumpValue <= 5) { // check if in jumping mode and near the top of a jump
+    ellipse(x, y + 60, 20 + (0.3 * -jumpValue), 20 + (0.3 * -jumpValue)); // enlarges mouth when jumpValue is low (i.e. close to top of screen) 
+  } else if (page != 0) { // otherwise draw normal mouth
+    ellipse(x, y + 60, 20, 20);
+  }
 }
 
-function eyes(x, y) { //eyes go here to be called into monster
+// this draws the eyeballs and pupils that move according to eyeDirection variable
+function eyes(x, y) { 
   fill(255); // whites of eyes
   ellipse(x - 50, y, 60, 60); // left eye
   ellipse(x + 50, y, 60, 60); // right eye
@@ -81,8 +99,9 @@ function eyes(x, y) { //eyes go here to be called into monster
   ellipse(x + 50 + eyeDirection, y, 30, 30); // right pupil
 }
 
-function mousePressed() {
-  page = 1 - page;
-  fill(0);
-  ellipse(mouseX, mouseY, 20, 20);
+// switches state from jumping to looking when mouse is pressed
+ function mousePressed() { 
+  if (mouseX > 100 && mouseX <300 && mouseY > 70 && mouseY < 130) { // checks if mouse is within buttom dimensions
+      page = 1 - page; // switches state
+  }
 }
