@@ -18,8 +18,18 @@ function draw() {
   background(245, 230, 245); // light pink background in draw to keep it refreshing
   monster(600, 250 + jumpValue); // draws monster at x and y coordinates, y-coord modified by jumping variable
   
-  fill(80, 0, 80); // fill for switch button
+  if (mouseIsPressed && mouseX > 100 && mouseX <300 && mouseY > 70 && mouseY < 130) { // determine if cursor is over button
+    fill(40, 0, 40); // fill color for pressed state
+  } else if (mouseX > 100 && mouseX <300 && mouseY > 70 && mouseY < 130){
+    fill(60, 0, 60); // fill color for hover state
+  } else { // fill color when mouse isn't on button
+    fill(80, 0, 80);
+  }
   rect(200, 100, 200, 60); // draws switch button in top left
+  fill(205, 215, 255); // fill for text
+  textSize(30); // large text size
+  textAlign(CENTER, CENTER); // vertically and horizontally center text
+  text("Switch", 200, 100); // write button label and center it
 
   if (page == 0) { // switches to eye movement state
     jumpValue = 0; // resets monster to middle of screen
