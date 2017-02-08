@@ -8,24 +8,22 @@
   -make each snowflake twinkle after it is drawn (continue changing colors)
   -make each snowflake fade away after a few seconds
   -make each snowflake mildly rotated
-  -make each snowflake slightly unique in stroke weight and size?
-  -make on-click snowflakes vary significantly in stroke weight and size
 */
 
 function setup() {
   createCanvas(1200, 720); // draw large canvas
   background(20, 20, 40); // dark blue background color
   angleMode(degrees);
-  frameRate(60);
+  frameRate(8);
 }
 
 function draw() {
-  snowflake(mouseX + random(-100, 100), mouseY + random(-100, 100), 5, random(10, 50), 1, 250);
+  snowflake(mouseX + random(-100, 100), mouseY + random(-100, 100), 5, random(10, 50), 1, 200);
 }
 
 // draws a snowflake near current mouse location when mouse is pressed
 function mousePressed() {
-  snowflake(mouseX, mouseY, 5, 100, 2, 250);
+  snowflake(mouseX, mouseY, 5, 100 + random(60), 8, 255);
 }
 
 // draws a line star around a given point, with a slightly randomized given color 
