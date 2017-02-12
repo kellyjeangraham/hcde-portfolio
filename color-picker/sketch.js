@@ -11,7 +11,6 @@ function preload() {
 function setup() {
   createCanvas(720, 720);
   noStroke();
-  frameRate(10);
   image(bg, 0, 0, 720, 720);
 }
 
