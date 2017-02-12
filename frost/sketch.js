@@ -15,11 +15,11 @@ function setup() {
   background(20, 20, 40); // dark blue background color in case image doesn't load
   image(bg, 0, 0, 1200, 720); // load in background image
   frameRate(14); // slow down framerate for more atmospheric snow feeling
-  textAlign(CENTER);
-  textSize(18);
-  noStroke();
-  fill(255, 255, 255, 150);
-  text("press c to clear the snow", width/2, 680);
+  textAlign(CENTER); // center text
+  textSize(18); // set text size
+  noStroke(); // remove strokes from text
+  fill(255, 255, 255, 150); // set transparent text fill
+  text("press c to clear the snow", width/2, 680); // write text on screen
 }
 
 function draw() {
