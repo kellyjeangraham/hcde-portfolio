@@ -1,8 +1,7 @@
 body {
-font-family: "San Francisco", Helvetica, Arial;
-text-align: center;
-margin: 200px, 600px, 100px;
-list-style-type: none;
+  font-family: "San Francisco", Helvetica, Arial;
+  margin: 200px, 500px, 100px, 100px;
+  list-style-type: none;
 }
 
 ul {
@@ -11,4 +10,9 @@ ul {
 
 li {
   list-style-type: none;
+}
+
+li a {
+  color: orange;
+  text-decoration: none;
 }
