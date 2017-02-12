@@ -4,36 +4,37 @@
   "Frost", snowflakes build up around mouse movement, larger ones appear on mouseclick.
 */
 
-/* TO DO LIST
-  -make each snowflake twinkle after it is drawn (continue changing colors)
-  -make each snowflake fade away after a few seconds
-  -make each snowflake mildly rotated
-  -add background image
-*/
-
-var a = 255;
+var a; // set up transparency varaible
 
 function preload() { // load in background snowflake image
-  bg = loadImage("snowflake.jpg");
+  bg = loadImage("snowflake.jpg"); // establish variable for bg image
 }
 
 function setup() {
   createCanvas(1200, 720); // draw large canvas
   background(20, 20, 40); // dark blue background color in case image doesn't load
   image(bg, 0, 0, 1200, 720); // load in background image
-  frameRate(10); // slow down framerate for more atmospheric snow feeling
+  frameRate(14); // slow down framerate for more atmospheric snow feeling
+  textAlign(CENTER);
+  textSize(18);
+  noStroke();
+  fill(255, 255, 255, 150);
+  text("press c to clear the snow", width/2, 680);
 }
 
 function draw() {
+  a = random(100, 255); // choose a random alpha value per snowflake
+  snowflake(mouseX + random(-50, 50), mouseY + random(-50, 50), 5, random(5, 50), 1, a); // draw a snowflake near current mouse position
 
-
-  snowflake(mouseX + random(-100, 100), mouseY + random(-100, 100), 5, random(5, 50), 1, a); // draw a snowflake near current mouse position
-
+  if (key == "c") { // check if "c" key is pressed
+    image(bg, 0, 0, 1200, 720); // reload in background image to clear snowflakes
+    text("press c to clear the snow", width/2, 680); // redraw text
+  }
 }
 
 // draws a larger snowflake near current mouse location when mouse is pressed
 function mousePressed() {
-  snowflake(mouseX, mouseY, 5, 100 + random(60), 8, 255);
+  snowflake(mouseX, mouseY, 5, 100 + random(60), 8, a);
 }
 
 // draws a line star around a given point, with a slightly randomized given color 
