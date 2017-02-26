@@ -1,7 +1,17 @@
 body {
-  font-family: "San Francisco", Helvetica, Arial;
+  width: 800px;
   margin: 200px, 500px, 100px, 100px;
+  font-family: 'San Francisco', Helvetica, Arial, sans-serif;
   list-style-type: none;
+}
+
+h1, h2 {
+  font-family: 'Merriweather', serif;
+  font-weight: 700;
+}
+
+p, li {
+  font-weight: 300;
 }
 
 ul {
@@ -13,6 +23,8 @@ li {
 }
 
 li a {
+  font-family: 'Merriweather', serif;
+  font-weight: 400;
   color: orange;
   text-decoration: none;
 }
